@@ -22,8 +22,12 @@ return [
         'controller' => 'main',
         'action' => 'stop',
     ],
-    'query' => [
+    'server' => [
         'controller' => 'main',
-        'action' => 'query',
+        'action' => 'server',
+    ],
+    'server/{id:\d+}' => [
+        'controller' => 'main',
+        'action' => 'server',
     ],
 ];

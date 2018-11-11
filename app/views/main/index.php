@@ -1,8 +1,4 @@
 <main role="main">
-    <div class="page-head pb-3">
-        <p class="d-5 m-0">Панель управления</p>
-        <small class="tt-muted">sensitive Control Panel</small>
-    </div>
     <div class="container pt-5 pb-5">
         <div class="row">
             <div class="col-8 p-0">
@@ -12,23 +8,24 @@
                             <div id="server<?php echo $srv['s_id'] ?>">
                                 <div class="panel" id="innerServer">
                                     <div class="panel__head">
-                                        Сервер <?php echo ucfirst($srv['s_type']) . ': ' . $srv['s_name'] ?> (ID: <?php echo $srv['s_id'] ?>)
+                                        Информация о сервере <?php echo ucfirst($srv['s_type']) . ': ' . $srv['s_name'] ?> (ID: <?php echo $srv['s_id'] ?>)
                                         <span class="float-right" onclick="update(<?php echo $srv['s_id'] ?>)"><i class="fas fa-sync-alt"></i></span>
                                     </div>
                                     <div class="panel__body pt-3 pb-3">
                                         <p>IP: <?php echo $srv['s_ip'] ?></p>
                                         <p>Статус: <?php echo empty($srv['s_hostname']) ? "Офлайн" : "Онлайн" ?></p>
                                         <?php if (!empty($srv['s_hostname'])): ?>
+                                            <p>Ping: <?php echo $srv['s_ping']?></p>
                                             <p>Количество игроков: <?php echo $srv['s_players'] . '/' . $srv['s_maxplayers'] ?></p>
                                             <p>Игровой режим: <?php echo $srv['s_gamemode']?></p>
                                         <?php endif; ?>
                                         <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
                                             <input type="hidden" name="name" value="<?php echo $srv['s_name']?>" hidden />
                                             <input type="hidden" name="game" value="<?php echo $srv['s_type']?>" hidden />
-                                            <input class="" type="submit" name="start" value="Включить сервер" />
+                                            <input class="" type="submit" name="start"onclick="utilityForm.action='/start'; return true;" value="Включить сервер" />
                                             <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                            <a href="/server/<?php echo $srv['s_id'] ?>">Подробная информация</a>
                                         </form>
-                                        <button class="">Показать логи</button>
                                     </div>
                                 </div>
                             </div>
@@ -51,21 +48,6 @@
         </div>
     </div>
 </main>
-<div class="modal">
-    <div class="modal__content">
-        <div class="modal__header">
-            <span class="close">&times;</span>
-            <h2>Modal Header</h2>
-        </div>
-        <div class="modal__body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
-        </div>
-        <div class="modal__footer">
-            <h3>Modal Footer</h3>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">
     function update(id) {

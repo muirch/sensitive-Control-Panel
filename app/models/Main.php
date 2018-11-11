@@ -72,7 +72,7 @@ class Main extends Model
     public function startServer($post)
     {
         if($post['game'] == 'samp') {
-            $srv = $this->getServerData($post['name']);
+            $srv = $this->getServerDataByName($post['name']);
             $ssh = new Net_SSH2($this->base['ssh_ip']);
             if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
                 $this->error = 'Error connection to host! Check your settings!';
@@ -106,6 +106,23 @@ class Main extends Model
         return false;
     }
 
+    public function getServerLogs($id)
+    {
+        $params = [
+            'id' => $id,
+        ];
+        $result = $this->db->row('SELECT * FROM servers WHERE s_id=:id', $params);
+        if ($result[0]['s_type']=='samp') {
+            $ssh = new Net_SSH2($this->base['ssh_ip']);
+            if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
+                $this->error = 'Error connection to host! Check your settings!';
+                return false;
+            }
+            $result[1]['logsdata'] = $ssh->exec('cd '. $result[0]['s_path'] .'; cat server_log.txt');
+        }
+        return $result[1]['logsdata'];
+    }
+
     function getBaseSettings()
     {
         return $this->db->row('SELECT * FROM settings');
@@ -117,18 +134,19 @@ class Main extends Model
         $srv_count = count($result);
         for ($i = 0; $i < $srv_count; $i++) {
             if ($result[$i]['s_type']=='samp') {
-                $data = $this->getQueryData($result[$i]['s_ip']);
+                $data = $this->getBasicSampQueryData($result[$i]['s_ip']);
                 $result[$i]['s_players'] = $data['players'];
                 $result[$i]['s_maxplayers'] = $data['maxplayers'];
                 $result[$i]['s_hostname'] = $data['hostname'];
                 $result[$i]['s_gamemode'] = $data['gamemode'];
                 $result[$i]['s_map'] = $data['map'];
+                $result[$i]['s_ping'] = $this->getSampQueryGetPing($result[$i]['s_ip']);
             }
         }
         return $result;
     }
 
-    function getServerData($name)
+    function getServerDataByName($name)
     {
         $params = [
             'name' => $name,
@@ -137,9 +155,49 @@ class Main extends Model
         return $result[0];
     }
 
-    function getQueryData($ip)
+    public function getServerDataById($id)
+    {
+        $params = [
+            'id' => $id,
+        ];
+        $result = $this->db->row('SELECT * FROM servers WHERE s_id=:id', $params);
+        if ($result[0]['s_type']=='samp') {
+            $data[0] = $this->getBasicSampQueryData($result[0]['s_ip']);
+            $result[0]['s_players'] = $data[0]['players'];
+            $result[0]['s_maxplayers'] = $data[0]['maxplayers'];
+            $result[0]['s_hostname'] = $data[0]['hostname'];
+            $result[0]['s_gamemode'] = $data[0]['gamemode'];
+            $result[0]['s_map'] = $data[0]['map'];
+            $result[0]['s_ping'] = $this->getSampQueryGetPing($result[0]['s_ip']);
+            $data[1] = $this->getSampQueryPlayerInfo($result[0]['s_ip']);
+            $result[1] = $data[1];
+            $data[2] = $this->getSampQueryRules($result[0]['s_ip']);
+            $result[2] = $data[2];
+        }
+        return $result;
+    }
+
+    function getBasicSampQueryData($ip)
     {
         $query = new SampQuery($ip);
         return $query->getInfo();
+    }
+
+    function getSampQueryPlayerInfo($ip)
+    {
+        $query = new SampQuery($ip);
+        return $query->getDetailedPlayers();
+    }
+
+    function getSampQueryRules($ip)
+    {
+        $query = new SampQuery($ip);
+        return $query->getRules();
+    }
+
+    function getSampQueryGetPing($ip)
+    {
+        $query = new SampQuery($ip);
+        return $query->getPing();
     }
 }

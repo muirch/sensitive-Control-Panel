@@ -46,8 +46,15 @@ class MainController extends Controller
         }
     }
 
-    public function queryAction()
+    public function serverAction()
     {
-
+        if (empty($this->route['id'])) {
+            $this->view->redirect('/server/1');
+        }
+        $params = [
+            'srv' => $this->model->getServerDataById($this->route['id']),
+            'logs' => $this->model->getServerLogs($this->route['id']),
+        ];
+        $this->view->render($params);
     }
 }

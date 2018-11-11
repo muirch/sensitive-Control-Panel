@@ -29,6 +29,11 @@
         </ul>
     </nav>
 
+    <div class="page-head pb-3">
+        <p class="d-5 m-0">Панель управления</p>
+        <small class="tt-muted">sensitive Control Panel</small>
+    </div>
+
     <?php echo $content?>
 
     <script src="/vendor/jquery-3.3.1.min.js"></script>

@@ -129,7 +129,7 @@ class SampQuery {
      * )
      * @see getBasicPlayers()
      */
-    public function getDetailedPlayers() {
+    public function getDetailedPlayers( ) {
 		// <editor-fold defaultstate="collapsed" desc="Get Detailed Players">
         @fwrite($this->sock, $this->assemblePacket("d"));
         fread($this->sock, 11);
