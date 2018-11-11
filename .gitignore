@@ -1,2 +1,2 @@
 .idea/**
-!/app/configs/global.php
+/app/configs/**
