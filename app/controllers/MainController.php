@@ -21,6 +21,7 @@ class MainController extends Controller
         $params = [
             'uptime' => $this->model->serverUpTime(),
             'stats' => $this->model->serverStats(),
+            'servers' => $this->model->getAllServersData(),
         ];
         $this->view->render($params);
     }
@@ -43,5 +44,10 @@ class MainController extends Controller
             }
             $this->view->message('success', 'Сервер успешно остановлен!');
         }
+    }
+
+    public function queryAction()
+    {
+
     }
 }

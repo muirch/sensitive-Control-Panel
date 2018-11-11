@@ -14,6 +14,8 @@
 // THREAD: http://forum.sa-mp.com/showthread.php?t=355574
 * *****************************************************************/
 
+namespace McKnight;
+
 class SampQuery {
     private $sock = null;
     private $server = null;

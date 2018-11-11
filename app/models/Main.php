@@ -3,7 +3,7 @@
 namespace app\models;
 
 use app\core\Model;
-use SampQuery;
+use McKnight\SampQuery;
 use Net_SSH2;
 
 /**
@@ -72,6 +72,7 @@ class Main extends Model
     public function startServer($post)
     {
         if($post['game'] == 'samp') {
+            $srv = $this->getServerData($post['name']);
             $ssh = new Net_SSH2($this->base['ssh_ip']);
             if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
                 $this->error = 'Error connection to host! Check your settings!';
@@ -83,7 +84,7 @@ class Main extends Model
                 return false;
             }
             elseif(!$response) {
-                $ssh->exec('cd /home/muir/srv/samp03/; nohup ./samp03svr &');
+                $ssh->exec('cd '. $srv['s_path'] .'; nohup ./samp03svr &');
                 return true;
             }
         }
@@ -108,5 +109,37 @@ class Main extends Model
     function getBaseSettings()
     {
         return $this->db->row('SELECT * FROM settings');
+    }
+
+    public function getAllServersData()
+    {
+        $result = $this->db->row('SELECT * FROM servers ORDER BY s_type');
+        $srv_count = count($result);
+        for ($i = 0; $i < $srv_count; $i++) {
+            if ($result[$i]['s_type']=='samp') {
+                $data = $this->getQueryData($result[$i]['s_ip']);
+                $result[$i]['s_players'] = $data['players'];
+                $result[$i]['s_maxplayers'] = $data['maxplayers'];
+                $result[$i]['s_hostname'] = $data['hostname'];
+                $result[$i]['s_gamemode'] = $data['gamemode'];
+                $result[$i]['s_map'] = $data['map'];
+            }
+        }
+        return $result;
+    }
+
+    function getServerData($name)
+    {
+        $params = [
+            'name' => $name,
+        ];
+        $result = $this->db->row('SELECT * FROM servers WHERE s_name=:name ORDER BY s_type ', $params);
+        return $result[0];
+    }
+
+    function getQueryData($ip)
+    {
+        $query = new SampQuery($ip);
+        return $query->getInfo();
     }
 }

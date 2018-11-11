@@ -14,6 +14,7 @@ use app\core\Router;
  * Autoload method for MVC and composer
  */
 require_once 'autoload.php';
+require_once 'vendor/sampquery/SampQuery.class.php';
 set_include_path(get_include_path() . PATH_SEPARATOR . 'vendor/phpseclib');
 include('Net/SSH2.php');
 /**

@@ -22,4 +22,8 @@ return [
         'controller' => 'main',
         'action' => 'stop',
     ],
+    'query' => [
+        'controller' => 'main',
+        'action' => 'query',
+    ],
 ];

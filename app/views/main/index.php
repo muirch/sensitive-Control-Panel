@@ -1,73 +1,39 @@
 <main role="main">
-    <div class="page-head"><p class="d-5">Панель управления</p></div>
+    <div class="page-head pb-3">
+        <p class="d-5 m-0">Панель управления</p>
+        <small class="tt-muted">sensitive Control Panel</small>
+    </div>
     <div class="container pt-5 pb-5">
         <div class="row">
-            <div class="col-8">
+            <div class="col-8 p-0">
                 <div class="row servers">
-                    <div class="col-6">
-                        <div class="panel">
-                            <div class="panel__head">Сервер SA-MP</div>
-                            <div class="panel__body pt-3 pb-3">
-                                <p>IP: </p>
-                                <p>Онлайн: </p>
-                                <p>Игровой режим:</p>
-                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
-                                    <input type="hidden" name="game" value="samp" hidden />
-                                    <input class="" type="submit" name="start" value="Включить сервер" />
-                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
-                                </form>
-                                <a class="" href="#">Посмотреть логи</a>
+                    <?php foreach ($params['servers'] as $srv): ?>
+                        <div class="col-6">
+                            <div id="server<?php echo $srv['s_id'] ?>">
+                                <div class="panel" id="innerServer">
+                                    <div class="panel__head">
+                                        Сервер <?php echo ucfirst($srv['s_type']) . ': ' . $srv['s_name'] ?> (ID: <?php echo $srv['s_id'] ?>)
+                                        <span class="float-right" onclick="update(<?php echo $srv['s_id'] ?>)"><i class="fas fa-sync-alt"></i></span>
+                                    </div>
+                                    <div class="panel__body pt-3 pb-3">
+                                        <p>IP: <?php echo $srv['s_ip'] ?></p>
+                                        <p>Статус: <?php echo empty($srv['s_hostname']) ? "Офлайн" : "Онлайн" ?></p>
+                                        <?php if (!empty($srv['s_hostname'])): ?>
+                                            <p>Количество игроков: <?php echo $srv['s_players'] . '/' . $srv['s_maxplayers'] ?></p>
+                                            <p>Игровой режим: <?php echo $srv['s_gamemode']?></p>
+                                        <?php endif; ?>
+                                        <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
+                                            <input type="hidden" name="name" value="<?php echo $srv['s_name']?>" hidden />
+                                            <input type="hidden" name="game" value="<?php echo $srv['s_type']?>" hidden />
+                                            <input class="" type="submit" name="start" value="Включить сервер" />
+                                            <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                        </form>
+                                        <button class="">Показать логи</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="panel">
-                            <div class="panel__head">Сервер SA-MP</div>
-                            <div class="panel__body pt-3 pb-3">
-                                <p>IP: </p>
-                                <p>Онлайн: </p>
-                                <p>Игровой режим:</p>
-                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
-                                    <input type="hidden" name="game" value="samp" hidden />
-                                    <input class="" type="submit" name="start" value="Включить сервер" />
-                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
-                                </form>
-                                <a class="" href="#">Посмотреть логи</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="panel">
-                            <div class="panel__head">Сервер SA-MP</div>
-                            <div class="panel__body pt-3 pb-3">
-                                <p>IP: </p>
-                                <p>Онлайн: </p>
-                                <p>Игровой режим:</p>
-                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
-                                    <input type="hidden" name="game" value="samp" hidden />
-                                    <input class="" type="submit" name="start" value="Включить сервер" />
-                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
-                                </form>
-                                <a class="" href="#">Посмотреть логи</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="panel">
-                            <div class="panel__head">Сервер SA-MP</div>
-                            <div class="panel__body pt-3 pb-3">
-                                <p>IP: </p>
-                                <p>Онлайн: </p>
-                                <p>Игровой режим:</p>
-                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
-                                    <input type="hidden" name="game" value="samp" hidden />
-                                    <input class="" type="submit" name="start" value="Включить сервер" />
-                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
-                                </form>
-                                <a class="" href="#">Посмотреть логи</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="col-4">
@@ -85,3 +51,24 @@
         </div>
     </div>
 </main>
+<div class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <span class="close">&times;</span>
+            <h2>Modal Header</h2>
+        </div>
+        <div class="modal__body">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+        </div>
+        <div class="modal__footer">
+            <h3>Modal Footer</h3>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function update(id) {
+        $('#server' + id).load('/ #server' + id);
+    }
+</script>
