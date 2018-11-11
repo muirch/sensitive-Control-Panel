@@ -33,6 +33,7 @@
 
     <script src="/vendor/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/app/public/js/ajax.min.js"></script>
     <script src="/app/public/js/core.min.js"></script>
 </body>
 </html>

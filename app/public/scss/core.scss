@@ -1,9 +1,15 @@
-@import "reset";
-@import "fonts";
-@import "typography";
-@import "utilities";
-@import "navigation";
-@import "grid";
+@import "_reset";
+
+/**
+ * https://sensou.me
+ * Styles for sensitive's Control Panel
+ */
+@import "_fonts";
+@import "_typography";
+@import "utilities/_utilities";
+@import "_navigation";
+@import "_grid";
+@import "_modal";
 
 * {
   box-sizing: border-box;

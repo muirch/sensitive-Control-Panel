@@ -1,0 +1,32 @@
+.br-1 {
+  border: 1px solid transparent;
+}
+.br-2 {
+  border: 2px solid transparent;
+}
+.br-3 {
+  border: 3px solid transparent;
+}
+
+.br-radius-1 {
+  border-radius: .5rem;
+}
+.br-radius-2 {
+  border-radius: 1rem;
+}
+.br-radius-3 {
+  border-radius: 1.5rem;
+}
+
+.br-light {
+  border-color: #f8f9fa !important;
+}
+.br-blue {
+  border-color: #2980b9 !important;
+}
+.br-green {
+  border-color: #2ecc71 !important;
+}
+.br-red {
+  border-color: #e74c3c !important;
+}

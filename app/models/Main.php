@@ -3,6 +3,8 @@
 namespace app\models;
 
 use app\core\Model;
+use SampQuery;
+use Net_SSH2;
 
 /**
  * Class Main
@@ -14,6 +16,14 @@ class Main extends Model
      * @var
      */
     public $error;
+
+    public $base = [];
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->base = $this->getBaseSettings()[0];
+    }
 
     public function serverUpTime()
     {
@@ -57,5 +67,46 @@ class Main extends Model
         $stat['hdd_used'] = $stat['hdd_total'] - $stat['hdd_free'];
         $stat['hdd_percent'] = round(sprintf('%.2f',($stat['hdd_used'] / $stat['hdd_total']) * 100), 2);
         return $stat;
+    }
+
+    public function startServer($post)
+    {
+        if($post['game'] == 'samp') {
+            $ssh = new Net_SSH2($this->base['ssh_ip']);
+            if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
+                $this->error = 'Error connection to host! Check your settings!';
+                return false;
+            }
+            $response = $ssh->exec('pgrep samp03svr');
+            if($response) {
+                $this->error = 'Server is already running!';
+                return false;
+            }
+            elseif(!$response) {
+                $ssh->exec('cd /home/muir/srv/samp03/; nohup ./samp03svr &');
+                return true;
+            }
+        }
+        $this->message = 'Error has been occur!';
+        return false;
+    }
+    public function stopServer($post)
+    {
+        if ($post['game'] == 'samp') {
+            $ssh = new Net_SSH2($this->base['ssh_ip']);
+            if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
+                $this->error = 'Error connection to host! Check your settings!';
+                return false;
+            }
+            $ssh->exec('pkill -f samp03svr');
+            return true;
+        }
+        $this->error = 'Error has been occur!';
+        return false;
+    }
+
+    function getBaseSettings()
+    {
+        return $this->db->row('SELECT * FROM settings');
     }
 }

@@ -3,19 +3,69 @@
     <div class="container pt-5 pb-5">
         <div class="row">
             <div class="col-8">
-                <div class="servers">
-                    <div class="panel">
-                        <div class="panel__head">Сервер SA-MP</div>
-                        <div class="panel__body pt-3 pb-3">
-                            <p>IP: </p>
-                            <p>Онлайн: </p>
-                            <p>Игровой режим:</p>
-                            <form class="panel__utilities">
-                                <input type="hidden" name="samp" hidden />
-                                <input class="" type="submit" name="start" value="Запустить сервер" />
-                                <input class="" type="submit" name="stop" value="Выключить сервер" />
+                <div class="row servers">
+                    <div class="col-6">
+                        <div class="panel">
+                            <div class="panel__head">Сервер SA-MP</div>
+                            <div class="panel__body pt-3 pb-3">
+                                <p>IP: </p>
+                                <p>Онлайн: </p>
+                                <p>Игровой режим:</p>
+                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
+                                    <input type="hidden" name="game" value="samp" hidden />
+                                    <input class="" type="submit" name="start" value="Включить сервер" />
+                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                </form>
                                 <a class="" href="#">Посмотреть логи</a>
-                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="panel">
+                            <div class="panel__head">Сервер SA-MP</div>
+                            <div class="panel__body pt-3 pb-3">
+                                <p>IP: </p>
+                                <p>Онлайн: </p>
+                                <p>Игровой режим:</p>
+                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
+                                    <input type="hidden" name="game" value="samp" hidden />
+                                    <input class="" type="submit" name="start" value="Включить сервер" />
+                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                </form>
+                                <a class="" href="#">Посмотреть логи</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="panel">
+                            <div class="panel__head">Сервер SA-MP</div>
+                            <div class="panel__body pt-3 pb-3">
+                                <p>IP: </p>
+                                <p>Онлайн: </p>
+                                <p>Игровой режим:</p>
+                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
+                                    <input type="hidden" name="game" value="samp" hidden />
+                                    <input class="" type="submit" name="start" value="Включить сервер" />
+                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                </form>
+                                <a class="" href="#">Посмотреть логи</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="panel">
+                            <div class="panel__head">Сервер SA-MP</div>
+                            <div class="panel__body pt-3 pb-3">
+                                <p>IP: </p>
+                                <p>Онлайн: </p>
+                                <p>Игровой режим:</p>
+                                <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
+                                    <input type="hidden" name="game" value="samp" hidden />
+                                    <input class="" type="submit" name="start" value="Включить сервер" />
+                                    <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
+                                </form>
+                                <a class="" href="#">Посмотреть логи</a>
+                            </div>
                         </div>
                     </div>
                 </div>

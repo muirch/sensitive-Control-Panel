@@ -14,4 +14,12 @@ return [
         'controller' => 'main',
         'action' => 'index',
     ],
+    'start' => [
+        'controller' => 'main',
+        'action' => 'start',
+    ],
+    'stop' => [
+        'controller' => 'main',
+        'action' => 'stop',
+    ],
 ];

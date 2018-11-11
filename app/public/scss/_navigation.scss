@@ -11,7 +11,7 @@
     padding: 10px 16px;
     background-color: #2f3640;
     & > i {
-      font-size: 50px;
+      font-size: 40px;
     }
   }
   & .navigation__list {
@@ -19,7 +19,6 @@
   }
   & .navigation__item {
     padding: 15px 0;
-    width: 70px;
     cursor: pointer;
     & .navigation__link {
       text-align: center;
@@ -27,7 +26,7 @@
       text-decoration: none;
       color: #fff;
       & > i {
-        font-size: 24px;
+        font-size: 20px;
       }
       & > .active {
         background-color: #ffffff;

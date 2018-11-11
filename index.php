@@ -14,6 +14,8 @@ use app\core\Router;
  * Autoload method for MVC and composer
  */
 require_once 'autoload.php';
+set_include_path(get_include_path() . PATH_SEPARATOR . 'vendor/phpseclib');
+include('Net/SSH2.php');
 /**
  * Start of session
  */
