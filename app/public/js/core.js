@@ -1,4 +1,3 @@
-ScrollReveal().reveal('.panel');
 
 $(function() {
     var i = 0;
@@ -6,3 +5,5 @@ $(function() {
         $('.navigation__list').toggle(500);
     });
 });
+
+ScrollReveal().reveal('.panel');

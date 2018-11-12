@@ -31,13 +31,9 @@
                     <div class="panel" id="srv_stats">
                         <div class="panel__head">Другая информация сервера <?php echo $srv[0]['s_name']?></div>
                         <div class="panel__body pt-3 pb-3">
-                            <p>IP: <?php echo $srv[0]['s_ip'] ?></p>
-                            <p>Статус: <?php echo empty($srv[0]['s_hostname']) ? "Офлайн" : "Онлайн" ?></p>
-                            <?php if (!empty($srv[0]['s_hostname'])): ?>
-                                <p>Hostname: <?php echo mb_convert_encoding($srv[0]['s_hostname'], "utf-8", "windows-1251"); ?></p>
-                                <p>Количество игроков: <?php echo $srv[0]['s_players'] . '/' . $srv[0]['s_maxplayers'] ?></p>
-                                <p>Игровой режим: <?php echo $srv[0]['s_gamemode']?></p>
-                            <?php endif; ?>
+                            <?php foreach ($srv[2] as $key => $value): ?>
+                                <p><?php echo $key . ': ' . $value; ?></p>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -68,7 +64,7 @@
             </div>
             <div class="col-6">
                 <div class="panel" id="srv_stats">
-                    <div class="panel__head">Логи сервера <?php echo $srv[0]['s_name']?></div>
+                    <div class="panel__head">Логи сервера <?php echo $srv[0]['s_name']?> <form class="ajax" method="post" action="/clean"><input type="hidden" name="id" value="<?php echo $srv[0]['s_id'] ?>" hidden /><input type="submit" name="submit" value="Очистить логи" /></form></div>
                     <div class="panel__body pt-3 pb-3">
                         <textarea style="min-width:100%;max-width:100%;min-height:400px;" disabled>
                             <?php echo (!mb_check_encoding($logs, 'UTF-8') && mb_check_encoding($logs, 'windows-1251')) ? mb_convert_encoding($logs, 'UTF-8', 'windows-1251') : $logs ?>

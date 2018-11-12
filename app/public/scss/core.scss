@@ -1,5 +1,4 @@
 @import "_reset";
-
 /**
  * https://sensou.me
  * Styles for sensitive's Control Panel.
@@ -22,6 +21,10 @@ body {
   margin: 0;
   height: 100%;
   background: #fafafa;
+}
+
+.loading {
+  overflow: hidden !important;
 }
 
 .container {

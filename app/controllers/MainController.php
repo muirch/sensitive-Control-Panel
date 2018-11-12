@@ -57,4 +57,14 @@ class MainController extends Controller
         ];
         $this->view->render($params);
     }
+
+    public function cleanAction()
+    {
+        if (!empty($_POST)) {
+            if (!$this->model->deleteServerLogs($_POST)) {
+                $this->view->message('error', $this->model->error);
+            }
+            $this->view->message('success', 'Логи успешно очищены!');
+        }
+    }
 }

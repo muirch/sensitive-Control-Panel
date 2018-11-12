@@ -11,7 +11,7 @@ if ($('form').hasClass('ajax')) {
                 cache: false,
                 processData: false,
                 success: function (result) {
-                    //alert(result);
+                    alert(result);
                     json = jQuery.parseJSON(result);
                     if (json.url) {
                         window.location.href = '/' + json.url;

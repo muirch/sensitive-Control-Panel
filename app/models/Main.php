@@ -123,6 +123,24 @@ class Main extends Model
         return $result[1]['logsdata'];
     }
 
+    public function deleteServerLogs($post) {
+        $params = [
+            'id' => $post['id'],
+        ];
+        $result = $this->db->row('SELECT * FROM servers WHERE s_id=:id', $params);
+        if ($result[0]['s_type']=='samp') {
+            $ssh = new Net_SSH2($this->base['ssh_ip']);
+            if (!$ssh->login($this->base['ssh_user'], $this->base['ssh_pass'])) {
+                $this->error = 'Error connection to host! Check your settings!';
+                return false;
+            }
+            $ssh->exec('cd '. $result[0]['s_path'] .'; rm server_log.txt; touch server_log.txt');
+            return true;
+        }
+        $this->error = 'Error has been occur!';
+        return false;
+    }
+
     function getBaseSettings()
     {
         return $this->db->row('SELECT * FROM settings');
@@ -139,7 +157,6 @@ class Main extends Model
                 $result[$i]['s_maxplayers'] = $data['maxplayers'];
                 $result[$i]['s_hostname'] = $data['hostname'];
                 $result[$i]['s_gamemode'] = $data['gamemode'];
-                $result[$i]['s_map'] = $data['map'];
                 $result[$i]['s_ping'] = $this->getSampQueryGetPing($result[$i]['s_ip']);
             }
         }
@@ -167,7 +184,6 @@ class Main extends Model
             $result[0]['s_maxplayers'] = $data[0]['maxplayers'];
             $result[0]['s_hostname'] = $data[0]['hostname'];
             $result[0]['s_gamemode'] = $data[0]['gamemode'];
-            $result[0]['s_map'] = $data[0]['map'];
             $result[0]['s_ping'] = $this->getSampQueryGetPing($result[0]['s_ip']);
             $data[1] = $this->getSampQueryPlayerInfo($result[0]['s_ip']);
             $result[1] = $data[1];

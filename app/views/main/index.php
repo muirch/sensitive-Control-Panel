@@ -22,7 +22,7 @@
                                         <form class="ajax panel__utilities" name="utilityForm" method="post" action="/start">
                                             <input type="hidden" name="name" value="<?php echo $srv['s_name']?>" hidden />
                                             <input type="hidden" name="game" value="<?php echo $srv['s_type']?>" hidden />
-                                            <input class="" type="submit" name="start"onclick="utilityForm.action='/start'; return true;" value="Включить сервер" />
+                                            <input class="" type="submit" name="start" onclick="utilityForm.action='/start'; return true;" value="Включить сервер" />
                                             <input class="" type="submit" name="stop" onclick="utilityForm.action='/stop'; return true;" value="Выключить сервер" />
                                             <a href="/server/<?php echo $srv['s_id'] ?>">Подробная информация</a>
                                         </form>

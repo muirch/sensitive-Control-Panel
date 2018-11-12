@@ -204,6 +204,21 @@ small {
 .pl-5 {
   padding-left: 3rem !important; }
 
+.m-auto {
+  margin: auto !important; }
+
+.mr-auto {
+  margin: 0 auto 0 0 !important; }
+
+.ml-auto {
+  margin: 0 0 0 auto !important; }
+
+.mt-auto {
+  margin: auto 0 0 0 !important; }
+
+.mb-auto {
+  margin: 0 0 auto 0 !important; }
+
 .m-0 {
   margin: 0 !important; }
 
@@ -554,6 +569,9 @@ body {
   margin: 0;
   height: 100%;
   background: #fafafa; }
+
+.loading {
+  overflow: hidden !important; }
 
 .container {
   margin-left: 10%;

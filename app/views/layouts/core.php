@@ -32,6 +32,7 @@
     <div class="page-head pb-3">
         <p class="d-5 m-0">Панель управления</p>
         <small class="tt-muted">sensitive Control Panel</small>
+        <a class="btn float-right mr-3">Добавить</a>
     </div>
 
     <?php echo $content?>

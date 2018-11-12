@@ -70,8 +70,8 @@ class SampQuery {
         $strLen = ord(fread($this->sock, 4));
         $serverInfo['gamemode'] = (string) fread($this->sock, $strLen);
 
-        $strLen = ord(fread($this->sock, 4));
-        $serverInfo['map'] = (string) fread($this->sock, $strLen);
+        //$strLen = ord(fread($this->sock, 4));
+        //$serverInfo['map'] = (string) fread($this->sock, $strLen);
 
         return $serverInfo;
 		// </editor-fold>

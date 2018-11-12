@@ -30,4 +30,8 @@ return [
         'controller' => 'main',
         'action' => 'server',
     ],
+    'clean' => [
+        'controller' => 'main',
+        'action' => 'clean',
+    ],
 ];
