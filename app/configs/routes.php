@@ -14,6 +14,14 @@ return [
         'controller' => 'main',
         'action' => 'index',
     ],
+    'settings' => [
+        'controller' => 'main',
+        'action' => 'settings',
+    ],
+    'about' => [
+        'controller' => 'main',
+        'action' => 'about',
+    ],
     'start' => [
         'controller' => 'main',
         'action' => 'start',
@@ -21,6 +29,10 @@ return [
     'stop' => [
         'controller' => 'main',
         'action' => 'stop',
+    ],
+    'clean' => [
+        'controller' => 'main',
+        'action' => 'clean',
     ],
     'server' => [
         'controller' => 'main',
@@ -30,8 +42,8 @@ return [
         'controller' => 'main',
         'action' => 'server',
     ],
-    'clean' => [
+    'server/add' => [
         'controller' => 'main',
-        'action' => 'clean',
+        'action' => 'add',
     ],
 ];

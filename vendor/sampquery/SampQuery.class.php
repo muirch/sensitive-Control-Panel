@@ -31,8 +31,8 @@ class SampQuery {
         $this->server = $server;
         $this->port = $port;
 
-        $this->sock = fsockopen("udp://".$this->server, $this->port, $errorNum, $errorString, 2);
-        socket_set_timeout($this->sock, 2);
+        $this->sock = fsockopen("udp://".$this->server, $this->port, $errorNum, $errorString);
+        socket_set_timeout($this->sock, 1);
 		// </editor-fold>
     }
 
